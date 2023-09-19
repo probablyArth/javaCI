@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    paths:
+      - "problems/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "11" # You can specify the Java version you need
+
+      - name: Determine changed problems
+        id: changed_problems
+        run: |
+          echo "::set-output name=changed_problems::$(git diff --name-only ${{ github.base_ref }}...${{ github.head_ref }} | grep 'problems/.*\.java' | cut -d/ -f2 | sort -u)"
+
+      - name: Build and run tests
+        run: |
+          for problem in ${{ steps.changed_problems.outputs.changed_problems }}; do
+            cd "problems/$problem"
+            javac Test.java
+            java Test
+            cd ../..
+          done
