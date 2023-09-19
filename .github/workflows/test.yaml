@@ -24,7 +24,7 @@ jobs:
       - name: Determine changed problems
         id: changed_problems
         run: |
-          echo "::set-output name=changed_problems::$(git diff --name-only ${{ github.base_ref }}...${{ github.head_ref }} | grep 'problems/.*\.java' | cut -d/ -f2 | sort -u)"
+          echo "${{ steps.changed_problems.outputs }}"
 
       - name: Build and run tests
         run: |
