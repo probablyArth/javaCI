@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and run tests
         run: |
-          for problem in ${{ steps.changed_problems.outputs.modified }}; do
+          for problem in ${{ steps.changed_problems.outputs.all }}; do
             cd "problems/$problem"
             javac Test.java
             java Test
