@@ -21,8 +21,12 @@ jobs:
           java-version: "11"
           distribution: "temurin"
           architecture: x64
-      - name: Determine changed problems
+      - uses: jitterbit/get-changed-files@v1
         id: changed_problems
+        with:
+          format: space-delimited
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Determine changed problems
         run: |
           echo "${{ steps.changed_problems.outputs.modified }}"
 
