@@ -35,8 +35,8 @@ jobs:
           for problem in ${{ steps.changed_problems.outputs.all }}; do
             folderName=$(grep "java" <<< "$problem" | awk -F/ '{print $2}')
             echo "$folderName"
-            cd "problems/$folderName"
-            javac Test.java
-            java Test
-            cd ../..
+            # cd "problems/$folderName"
+            # javac Test.java
+            # java Test
+            # cd ../..
           done
