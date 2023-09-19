@@ -29,6 +29,11 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             if [[ "$file" == problems/* && "$file" == *.java ]]; then
-              echo "$file"
+              folderName=$(awk -F/ '{print $2}' <<< "$file")
+              echo "Running Tests for $folderName"
+              cd "problems/$folderName"
+              javac Test.java
+              java Test
+              cd ../..
             fi
           done

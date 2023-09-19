@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 public class Test {
     public static void main(String[] args) throws Exception {
         Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-        logger.log(Level.INFO, "Running tests for problem1");
         Solution solveSolution = new Solution();
         int[] ans = solveSolution.solve(new int[] { 2, 3, 4, 1, 1, 7, 8 });
         int min, max;
