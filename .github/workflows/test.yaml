@@ -1,10 +1,12 @@
 name: CI
 
 on:
+  push:
+    paths:
+      - "problems/**"
   pull_request:
     paths:
       - "problems/**"
-
 jobs:
   build:
     runs-on: ubuntu-latest
