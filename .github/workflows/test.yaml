@@ -33,7 +33,8 @@ jobs:
       - name: Build and run tests
         run: |
           for problem in ${{ steps.changed_problems.outputs.all }}; do
-            cd "problems/$problem"
+            folderName=$(awk -F/ '{print $2}' <<< "$problem")
+            cd "problems/$folderName"
             javac Test.java
             java Test
             cd ../..
