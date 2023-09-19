@@ -28,12 +28,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Determine changed problems
         run: |
-          echo "${{ steps.changed_problems.outputs.modified }}"
+          echo "${{ steps.changed_problems.outputs.all }}"
 
       - name: Build and run tests
         run: |
           for problem in ${{ steps.changed_problems.outputs.all }}; do
             folderName=$(grep "java" <<< "$problem" | awk -F/ '{print $2}')
+            echo "$folderName"
             cd "problems/$folderName"
             javac Test.java
             java Test
