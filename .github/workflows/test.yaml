@@ -21,18 +21,13 @@ jobs:
       #     java-version: "11"
       #     distribution: "temurin"
       #     architecture: x64
-      - uses: jitterbit/get-changed-files@v1
-        id: changed_problems
-        with:
-          format: space-delimited
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Determine changed problems
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v39
+
+      - name: List all changed files
         run: |
-          echo "${{ steps.changed_problems.outputs.all }}"
-      - name: Build and run tests
-        run: |
-          IFS = ' '
-          read -ra values <<< ${{ steps.changed_problems.outputs.all }}
-          for problem in "${values[@]}"; do
-            echo "$problem" | grep 'java'
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
           done
