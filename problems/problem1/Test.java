@@ -9,13 +9,9 @@ public class Test {
             min = ans[0];
             max = ans[1];
         } catch (Exception e) {
-            System.err.println("Runtime error");
-            System.exit(1);
             throw new Error("Runtime Error");
         }
         if (min != 1 || max != 8) {
-            System.err.println("Wrong solution!");
-            System.exit(1);
             throw new Exception("Wrong solution!");
         }
         System.out.print("Testcase passed!");
