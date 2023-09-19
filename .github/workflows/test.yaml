@@ -13,13 +13,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
-          java-version: "11" # You can specify the Java version you need
-
+          java-version: "11"
+          distribution: "temurin"
+          architecture: x64
       - name: Determine changed problems
         id: changed_problems
         run: |
